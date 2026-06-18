@@ -383,16 +383,20 @@ def prep_figure_data(d_all):
 
 def plot_all_session_figures(dd_all):
 
+    # Exclude the special at-home manipulation days from the summary figures.
+    dd_train = dd_all[~dd_all['session_type'].isin(
+        ['Dual-Task at home', 'Button-Switch at home'])].copy()
+
     # Figure --- all session types
     fig, ax = plt.subplots(1, 1, squeeze=False, figsize=(8, 5))
-    sns.pointplot(data=dd_all,
+    sns.pointplot(data=dd_train,
                   x='day',
                   y='acc',
                   hue='session_type',
                   errorbar=('se'),
                   ax=ax[0, 0])
     [
-        x.set_xticks(np.arange(0, dd_all['day'].max() + 2, 1))
+        x.set_xticks(np.arange(0, dd_train['day'].max() + 2, 1))
         for x in ax.flatten()
     ]
     ax[0, 0].set_xlabel('Day', fontsize=16)
@@ -403,14 +407,14 @@ def plot_all_session_figures(dd_all):
 
     # Figure --- all session types RT
     fig, ax = plt.subplots(1, 1, squeeze=False, figsize=(8, 5))
-    sns.pointplot(data=dd_all,
+    sns.pointplot(data=dd_train,
                   x='day',
                   y='rt',
                   hue='session_type',
                   errorbar=('se'),
                   ax=ax[0, 0])
     [
-        x.set_xticks(np.arange(0, dd_all['day'].max() + 2, 1))
+        x.set_xticks(np.arange(0, dd_train['day'].max() + 2, 1))
         for x in ax.flatten()
     ]
     ax[0, 0].set_xlabel('Day', fontsize=16)

@@ -97,7 +97,7 @@ class EEGPort:
 if __name__ == "__main__":
 
     # --------------------------- Subject / Day handling ---------------------------
-    subject = 503
+    subject = 9999999
     day = 1
 
     # NOTE: We want each session to last about 20 min = 20 min * 60 sec / min = 1200 sec.
